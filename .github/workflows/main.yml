@@ -23,8 +23,9 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }} 
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+          DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
         run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker login $DOCKER_REPO -u $DOCKER_USER -p $DOCKER_PASS
 
       # Runs a single command using the runners shell
       - name: docker build
