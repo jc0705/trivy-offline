@@ -25,6 +25,7 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
         run: |
+          date
           docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
 
       # Runs a single command using the runners shell
