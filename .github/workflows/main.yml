@@ -7,6 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
+  schedule:
+    - cron: '0 1 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,7 +27,6 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
         run: |
-          date
           docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
 
       # Runs a single command using the runners shell
