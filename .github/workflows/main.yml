@@ -19,8 +19,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }} 
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Runs a single command using the runners shell
       - name: docker build
         run: |
           docker build -t trivy-offline:latest .
+      - name: docker push
+        env:
+          DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+        run: |
+          docker tag trivy-offline:latest $DOCKER_REPO/$DOCKER_USER/trivy-offline:latest
+          docker push $DOCKER_REPO/$DOCKER_USER/trivy-offline:latest
