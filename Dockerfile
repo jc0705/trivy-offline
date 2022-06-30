@@ -13,4 +13,4 @@ RUN wget https://github.com/oras-project/oras/releases/download/v0.12.0/oras_0.1
     mv ./kubernetes/ /root/.cache/trivy/policy/content/ && \
     mv ./.manifest /root/.cache/trivy/policy/content/
 
-ENTRYPOINT [ "trivy", "image", "--skip-update", "--offline-scan"]
+ENTRYPOINT [ "trivy", "image", "--skip-update", "--offline-scan", "--security-checks", "vuln"]
